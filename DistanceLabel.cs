@@ -14,6 +14,7 @@ public class DistanceLabel : MonoBehaviour
     private GameObject _camera;
     [SerializeField]
     private TextMesh _text;
+    public bool _imperial = false;
     void Start()
     {
 
@@ -28,9 +29,19 @@ public class DistanceLabel : MonoBehaviour
 
         this.transform.position = new Vector3(midpointX, midpointY, midpointZ);
 
-        _text.text = (_pointAScript._distance.ToString("F2")) + " meters";
+        if(_imperial == false)
+        {
+            _text.text = (_pointAScript._distance.ToString("F2")) + " meters";
+        }
+        else
+        {
+            float imperialDistance = _pointAScript._distance * 3.28084f;
+            float imperialFeet = Mathf.Floor(imperialDistance);
+            float imperialInches = (imperialDistance - imperialFeet) * 12;
+            _text.text = (imperialFeet.ToString("F0")) + " ft " + (imperialInches.ToString("F0")) + " in";
+        }
 
-        Vector3 directionToCamera = _camera.transform.position - transform.position;
+            Vector3 directionToCamera = _camera.transform.position - transform.position;
         transform.LookAt(transform.position - directionToCamera);
     }
 }
