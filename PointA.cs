@@ -13,7 +13,9 @@ public class PointA : MonoBehaviour, IInputClickHandler
     private float _distanceY;
     private float _distanceZ;
     public float _distance;
-    private bool _following = false;
+    public bool _following = false;
+    [SerializeField]
+    private GameObject _deselector;
     void Start () {
 
     }
@@ -43,6 +45,7 @@ public class PointA : MonoBehaviour, IInputClickHandler
         {
             this.transform.parent = GameObject.Find("MixedRealityCamera").transform;
             _following = true;
+            _deselector.SetActive(true);
         }
         else
         {

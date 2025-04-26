@@ -14,6 +14,8 @@ public class DistanceLabel : MonoBehaviour
     private GameObject _camera;
     [SerializeField]
     private TextMesh _text;
+    [SerializeField]
+    private bool _scalable = false;
     public bool _imperial = false;
     void Start()
     {
@@ -28,6 +30,11 @@ public class DistanceLabel : MonoBehaviour
         float midpointZ = (_pointB.transform.position.z + _pointA.transform.position.z) / 2;
 
         this.transform.position = new Vector3(midpointX, midpointY, midpointZ);
+
+        if( _scalable == true)
+        {
+            transform.localScale = new Vector3(0.075f * _pointAScript._distance, 0.075f * _pointAScript._distance, 0.075f * _pointAScript._distance);
+        }
 
         if(_imperial == false)
         {
